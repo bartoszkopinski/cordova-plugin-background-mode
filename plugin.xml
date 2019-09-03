@@ -26,6 +26,9 @@
         <engine name="android-sdk" version=">=16" />
     </engines>
 
+    <hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
+    <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
+
     <!-- js -->
     <js-module src="www/background-mode.js" name="BackgroundMode">
         <clobbers target="cordova.plugins.backgroundMode" />
@@ -57,6 +60,7 @@
 
     <!-- android -->
     <platform name="android">
+        <framework src="src/android/bgmode.gradle" custom="true" type="gradleReference"/>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="BackgroundMode">
                 <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundMode"/>
@@ -70,12 +74,13 @@
             <preference name="KeepRunning" value="true" />
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <config-file target="AndroidManifest.xml" parent="application">
             <service android:name="de.appplant.cordova.plugin.background.ForegroundService" />
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
         </config-file>
 
         <source-file
