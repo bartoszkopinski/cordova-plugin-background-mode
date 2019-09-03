@@ -17,7 +17,7 @@ module.exports = {
             "        mavenCentral()",
             "    }",
             "    dependencies {",
-            "        classpath 'me.tatarka:gradle-retrolambda:3.2.4'",
+            "        classpath 'me.tatarka:gradle-retrolambda:3.7.0'",
             "    }",
             "}",
             "",
